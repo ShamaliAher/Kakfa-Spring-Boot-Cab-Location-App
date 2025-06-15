@@ -1,0 +1,44 @@
+🔧 1. Start Zookeeper (if using standalone)
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+🚀 2. Start Kafka Broker
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+📦 3. Create a Topic
+.\bin\windows\kafka-topics.bat --create --topic my-topic --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+📃 4. List Topics
+.\bin\windows\kafka-topics.bat --list --bootstrap-server localhost:9092
+
+🔍 5. Describe Topic
+.\bin\windows\kafka-topics.bat --describe --topic my-topic --bootstrap-server localhost:9092
+
+✉️ 6. Send Messages to a Topic (Producer)
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic my-topic
+Then type your messages in the console.
+
+📬 7. Read Messages from a Topic (Consumer)
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic my-topic --from-beginning
+
+🔄 8. Delete a Topic
+.\bin\windows\kafka-topics.bat --delete --topic my-topic --bootstrap-server localhost:9092
+
+🛠️ 9. List Consumer Groups
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --list
+
+📊 10. Describe a Consumer Group
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group <group-name>
+
+🔁 11. Reset Consumer Group Offsets
+.\bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --group <group-name> --topic <topic-name> --reset-offsets --to-earliest --execute
+
+🧹 12. Purge Kafka Logs (optional clean up)
+del /s /q .\kafka-logs\*
+del /s /q .\zookeeper\version-2\*
+
+🧪 13. Kafka Producer/Consumer Performance Testing
+.\bin\windows\kafka-producer-perf-test.bat --topic test --num-records 1000 --record-size 100 --throughput 1000 --producer-props bootstrap.servers=localhost:9092
+
+.\bin\windows\kafka-consumer-perf-test.bat --broker-list localhost:9092 --messages 1000 --topic test --threads 1 --group test-group
+✅ 14. Stop Kafka & Zookeeper
+Just press Ctrl + C in the terminal running Kafka or Zookeeper to stop them manually.
